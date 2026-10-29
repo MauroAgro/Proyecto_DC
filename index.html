@@ -2,27 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ETc del Cultivo - FAO 56</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 40px auto; padding: 20px; color: #333; }
-        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        h2 { color: #2980b9; margin-top: 30px; }
-        img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; margin: 15px 0; display: block; }
-        .resultado { background: #ecf0f1; padding: 15px; border-radius: 8px; margin: 20px 0; }
-        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
-        th, td { border: 1px solid #bdc3c7; padding: 8px; text-align: left; }
-        th { background: #34495e; color: white; }
-        .btn { display: inline-block; background: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; }
-        .btn:hover { background: #2980b9; }
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; color: #333; line-height: 1.6; }
+        h1 { color: #2c3e50; border-bottom: 3px solid #27ae60; padding-bottom: 10px; }
+        h2 { color: #27ae60; margin-top: 30px; }
+        .resumen { background: #e8f5e9; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #27ae60; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #27ae60; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0; display: block; }
+        .grafico-container { margin: 40px 0; }
+        .btn { display: inline-block; background: #27ae60; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 10px 10px 10px 0; }
+        .btn:hover { background: #219150; }
+        .btn-secondary { background: #3498db; }
+        .btn-secondary:hover { background: #2980b9; }
+        .alert { background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 6px; margin: 20px 0; }
     </style>
 </head>
 <body>
 
 <h1>🌱 ETc del Cultivo por FAO-56</h1>
-<p><strong>Proyecto de evapotranspiración del cultivo con riego al 50 % de TAW</strong></p>
+<p><strong>Proyecto de evapotranspiración del cultivo con riego al umbral UR (50 % TAW)</strong></p>
 
-<h2>📊 Resultados principales</h2>
-<div class="resultado">
+<div class="resumen">
+    <h2>📊 Resumen del escenario</h2>
     <table>
         <tr><th>Indicador</th><th>Valor</th></tr>
         <tr><td>Periodo simulado</td><td>15-09-2025 a 07-04-2026 (205 días)</td></tr>
@@ -37,25 +43,78 @@
 
 <h2>📈 Gráficos del proyecto</h2>
 
-<h3>1. Evapotranspiración diaria</h3>
-<img src="fig_ETc_escenario_riego.png" alt="ETc diaria">
+<div class="grafico-container">
+    <h3>1. Evapotranspiración diaria (ETo y ETc)</h3>
+    <img src="fig_ETc_escenario_riego.png" alt="ETc diaria">
+</div>
 
-<h3>2. Coeficientes Kc y Kcb en la temporada</h3>
-<img src="fig_Kc_temporada.png" alt="Kc temporada">
+<div class="grafico-container">
+    <h3>2. Coeficientes Kc y Kcb en la temporada</h3>
+    <img src="fig_Kc_temporada.png" alt="Kc temporada">
+</div>
 
-<h3>3. Agua en suelo, riegos y precipitaciones</h3>
-<img src="fig_agua_suelo_riego.png" alt="Agua suelo y riego">
+<div class="grafico-container">
+    <h3>3. Agua en el suelo, precipitaciones y riegos</h3>
+    <img src="fig_agua_suelo_riego.png" alt="Agua suelo y riego">
+</div>
 
-<h2>📁 Archivos del proyecto</h2>
-<ul>
-    <li><a href="Proyecto_Mod_Hid_MA_MB.py">Código Python completo</a></li>
-    <li><a href="Proyecto_ETc_FAO56_Cuaderno.ipynb">Cuaderno Jupyter</a></li>
-    <li><a href="Datos_clima_P2.xlsx">Datos climáticos (Excel)</a></li>
-    <li><a href="resultados_ETc_escenario_riego.csv">Resultados (CSV)</a></li>
-    <li><a href="README.md">Documentación completa</a></li>
-</ul>
+<h2>🚿 Tabla de riegos estimados</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Día del año</th>
+            <th>Dr antes [mm]</th>
+            <th>Riego [mm]</th>
+            <th>Riego [m³/ha]</th>
+            <th>Acumulado [mm]</th>
+            <th>Acumulado [m³/ha]</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Estas filas se llenan con los datos del CSV de riegos -->
+        <tr><td colspan="7">Cargando datos de riegos...</td></tr>
+    </tbody>
+</table>
 
-<a href="README.md" class="btn">Ver documentación completa</a>
+<script>
+    // Cargar los datos de riegos desde el CSV
+    fetch('riegos_estimados.csv')
+        .then(response => response.text())
+        .then(csvText => {
+            const lines = csvText.trim().split('\n');
+            const tbody = document.querySelector('table tbody');
+            tbody.innerHTML = '';
+            
+            // Saltar la primera línea (encabezados)
+            for (let i = 1; i < lines.length; i++) {
+                const cols = lines[i].split(',');
+                if (cols.length >= 7) {
+                    const row = `<tr>
+                        <td>${cols[0]}</td>
+                        <td>${cols[1]}</td>
+                        <td>${cols[2]}</td>
+                        <td>${cols[3]}</td>
+                        <td>${cols[4]}</td>
+                        <td>${cols[5]}</td>
+                        <td>${cols[6]}</td>
+                    </tr>`;
+                    tbody.innerHTML += row;
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error cargando riegos:', error);
+            document.querySelector('table tbody').innerHTML = '<tr><td colspan="7">No se pudieron cargar los datos de riegos.</td></tr>';
+        });
+</script>
+
+<h2>📁 Descargar archivos del proyecto</h2>
+<a href="Proyecto_Mod_Hid_MA_MB.py" class="btn">Código Python</a>
+<a href="Proyecto_ETc_FAO56_Cuaderno_Final.ipynb" class="btn btn-secondary">Cuaderno Jupyter</a>
+<a href="Datos_clima_P2.xlsx" class="btn btn-secondary">Datos climáticos (Excel)</a>
+<a href="resultados_ETc_escenario_riego.csv" class="btn btn-secondary">Resultados (CSV)</a>
+<a href="riegos_estimados.csv" class="btn btn-secondary">Riegos estimados (CSV)</a>
 
 </body>
 </html>
