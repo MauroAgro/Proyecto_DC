@@ -61,4 +61,3 @@ Donde $Ks$ es el coeficiente de estrés hídrico (Eq. 82 FAO-56), calculado a pa
 
 Como el riego repone el suelo al 50 % de TAW, el cultivo no sufre estrés hídrico ($Ks \approx 1$ todo el ciclo), por lo que ETc estándar ≈ ETc no estándar.
 
-## 📁 Estructura del repositorio
